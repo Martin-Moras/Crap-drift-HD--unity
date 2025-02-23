@@ -1,0 +1,34 @@
+{
+    "name": "playerInputManager",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "96460054-4fe7-437b-aef8-4a09c7cc5af7",
+            "actions": [
+                {
+                    "name": "driveForward",
+                    "type": "Value",
+                    "id": "237a91d2-f505-4f2e-9aac-efd261baa82a",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "827cd32f-ef82-4d0c-ac65-aead602aa3c7",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "driveForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
