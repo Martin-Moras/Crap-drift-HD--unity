@@ -69,8 +69,8 @@ public class frontTires : MonoBehaviour
 			newStability = 0f;
 		}*/
 
-		Vector2 forwardVel = transform.right * Vector2.Dot(rb.velocity, transform.right);
-		Vector2 sideVel = transform.up * Vector2.Dot(rb.velocity, transform.up);
+		Vector2 forwardVel = transform.right * Vector2.Dot(rb.linearVelocity, transform.right);
+		Vector2 sideVel = transform.up * Vector2.Dot(rb.linearVelocity, transform.up);
 
 		//test.transform.position = transform.position + (transform.up * -friction);
 		Debug.Log(sideVel);
@@ -78,7 +78,7 @@ public class frontTires : MonoBehaviour
 		
 		if (sideVel.magnitude < newStability)
 		{
-			rb.velocity = forwardVel;
+			rb.linearVelocity = forwardVel;
 			trail.emitting = false;
 		}
 		else

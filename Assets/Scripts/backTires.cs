@@ -45,9 +45,9 @@ public class backTires : MonoBehaviour
 		{
 			rb.AddForce(transform.right * Mathf.Pow(1 - damping, speed * Time.deltaTime));
 		}
-		else if (rb.velocity.x + rb.velocity.y < .2f)
+		else if (rb.linearVelocity.x + rb.linearVelocity.y < .2f)
 		{
-			rb.velocity /= 1.02f;
+			rb.linearVelocity /= 1.02f;
 		}
 
 		if (isHandBreaking)
@@ -56,8 +56,8 @@ public class backTires : MonoBehaviour
 			newStability = 0f;
 		}
 		
-		Vector2 forwardVel = transform.right * Vector2.Dot(rb.velocity, transform.right);
-		Vector2 sideVel = transform.up * Vector2.Dot(rb.velocity, transform.up);
+		Vector2 forwardVel = transform.right * Vector2.Dot(rb.linearVelocity, transform.right);
+		Vector2 sideVel = transform.up * Vector2.Dot(rb.linearVelocity, transform.up);
 		
 		//test.transform.position = transform.position + (transform.up * -friction);
 		
@@ -65,7 +65,7 @@ public class backTires : MonoBehaviour
 		
 		if (sideVel.magnitude < newStability)
 		{
-			rb.velocity = forwardVel;
+			rb.linearVelocity = forwardVel;
 			trail.emitting = false;
 		}
 		else
