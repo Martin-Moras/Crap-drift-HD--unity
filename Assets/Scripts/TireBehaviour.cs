@@ -15,6 +15,7 @@ public class TireBehaviour : MonoBehaviour
 	public float maxSteerAngle;
 	public bool alignWithVelicity;
 	[Header("Acceleration Settings")]
+	public AnimationCurve accelerationCurve;
 	public float accelerationInput;
 	public float accelerationCoefficient;
 	public float frontAcceleration;
@@ -68,11 +69,10 @@ public class TireBehaviour : MonoBehaviour
 
 		void HandleAcceleration()
 		{
-			angularVel += accelerationInput *
-							(accelerationInput > 0 ?
-								frontAcceleration :
-								backAcceleration);
-			// if (angularVel > ForwardVel(relativeGroundVelocity).magnitude + )
+			angularVel += accelerationInput 
+							* (accelerationInput > 0 ? frontAcceleration : backAcceleration)
+							/ accelerationCoefficient * accelerationCurve.Evaluate(angularVel);
+			Debug.Log(accelerationCoefficient * accelerationCurve.Evaluate(angularVel));
 		}
 		Vector2 ForwardVel(Vector2 groundVel)
 		{
