@@ -41,7 +41,6 @@ public class Player : MonoBehaviour
 	}
 	void Update()
 	{
-		Camera.main.transform.position = transform.position + new Vector3(0, 0, -10);
 		rb.centerOfMass = centerOfMass.localPosition;
 	}
 	private void FixedUpdate()

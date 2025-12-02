@@ -25,8 +25,10 @@ public class TireBehaviour : MonoBehaviour
 	[Header("Friction Settings")]
 	public bool isHandBreaking = false;
 	public float staticFriction;
+	public float stopSlidingVelocity;
 	public float dynamicFriction;
 	public float angularVel;
+	public bool isSliding;
 
 
 	public Vector2 relativeGroundVelocity { get; private set; }
@@ -53,8 +55,10 @@ public class TireBehaviour : MonoBehaviour
 		}
 		else	
 			angularVel = 0;
-			
-		if (relativeGroundVelocity.magnitude < staticFriction)
+
+		if (isSliding && relativeGroundVelocity.magnitude < stopSlidingVelocity)
+			isSliding = false;
+		if (relativeGroundVelocity.magnitude < staticFriction && !isSliding)
 		{
 			trail.emitting = false;
 			angularVel += Vector2.Dot(ForwardVel(relativeGroundVelocity), transform.up);
@@ -62,6 +66,7 @@ public class TireBehaviour : MonoBehaviour
 		}
 		else
 		{
+			isSliding = true;
 			trail.emitting = true;
 			angularVel += math.sign(Vector2.Dot(ForwardVel(relativeGroundVelocity), transform.up)) * dynamicFriction;
 			return relativeGroundVelocity.normalized * dynamicFriction;
