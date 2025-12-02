@@ -23,7 +23,6 @@ public class TireBehaviour : MonoBehaviour
 
 	[Header("Friction Settings")]
 	public bool isHandBreaking = false;
-	public float damping;
 	public float staticFriction;
 	public float dynamicFriction;
 	public float angularVel;
