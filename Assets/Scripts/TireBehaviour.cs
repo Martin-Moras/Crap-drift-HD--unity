@@ -26,10 +26,9 @@ public class TireBehaviour : MonoBehaviour
 	public float damping;
 	public float staticFriction;
 	public float dynamicFriction;
+	public float angularVel;
 
 
-	public Vector2 sideVel { get; private set; }
-	public Vector2 forwardVel { get; private set; }
 	public Vector2 relativeGroundVelocity { get; private set; }
 
 
@@ -45,42 +44,44 @@ public class TireBehaviour : MonoBehaviour
 	}
 	public Vector2 GetFrictionForces(Rigidbody2D CarRb)
 	{
-		SetRelativeGroundVelocity();
-		relativeGroundVelocity = -CarRb.GetPointVelocity(relativePosition);
+		relativeGroundVelocity = -CarRb.GetPointVelocity(transform.position);
 		HandleSteering(CarRb);
-		HandleAcceleration();
-		SetRelativeVelocity();
-
 		if (!isHandBreaking)
 		{
-			relativeGroundVelocity += forwardVel;
+			HandleAcceleration();
+			relativeGroundVelocity += (Vector2)transform.up * angularVel;
 		}
+		else	
+			angularVel = 0;
+			
 		if (relativeGroundVelocity.magnitude < staticFriction)
 		{
 			trail.emitting = false;
-			return forwardVel;
+			angularVel += Vector2.Dot(ForwardVel(relativeGroundVelocity), transform.up);
+			return -ForwardVel(relativeGroundVelocity) - SiedVel(relativeGroundVelocity);
 		}
 		else
 		{
 			trail.emitting = true;
+			angularVel += math.sign(Vector2.Dot(ForwardVel(relativeGroundVelocity), transform.up)) * dynamicFriction;
 			return relativeGroundVelocity.normalized * dynamicFriction;
 		}
 
 		void HandleAcceleration()
 		{
-			relativeGroundVelocity += (Vector2)transform.right * accelerationInput *
-										(accelerationInput > 0 ?
-											frontAcceleration :
-											backAcceleration);
-			// if (rb.linearVelocity.x + rb.linearVelocity.y < .2f)
-			// {
-			// 	rb.linearVelocity /= 1.02f;
-			// }
+			angularVel += accelerationInput *
+							(accelerationInput > 0 ?
+								frontAcceleration :
+								backAcceleration);
+			// if (angularVel > ForwardVel(relativeGroundVelocity).magnitude + )
 		}
-		void SetRelativeVelocity()
+		Vector2 ForwardVel(Vector2 groundVel)
 		{
-			forwardVel = transform.right * Vector2.Dot(-relativeGroundVelocity, transform.right);
-			sideVel = transform.up * Vector2.Dot(-relativeGroundVelocity, transform.up);
+			return transform.up * (Vector2.Dot(-relativeGroundVelocity, transform.up));
+		}
+		Vector2 SiedVel(Vector2 groundVel)
+		{
+			return transform.right * Vector2.Dot(-relativeGroundVelocity, transform.right);
 		}
 		void SetRelativeGroundVelocity()
 		{
@@ -89,22 +90,16 @@ public class TireBehaviour : MonoBehaviour
 	}
 	public void HandleSteering(Rigidbody2D carRb)
 	{
-		float baseAngle;
-		Vector2 velocity = carRb.GetPointVelocity(relativePosition);
-		if (alignWithVelicity && velocity.magnitude > 1f)
+		float baseAngle = 0;
+		Vector2 velocity = carRb.linearVelocity;//.GetPointVelocity(relativePosition);
+		if (alignWithVelicity && velocity.magnitude > 100f)
 		{
-			baseAngle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+			float velAngle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+			baseAngle = Mathf.DeltaAngle(carRb.rotation, velAngle);
 		}
-		else
-		{
-			baseAngle = carRb.rotation;
-		}
-		float desiredAngle = baseAngle + steerInput * steerCoefficient;
-		float angleDifference = Mathf.DeltaAngle(carRb.rotation, desiredAngle);
-		if (Mathf.Abs(angleDifference) > maxSteerAngle)
-		{
-			desiredAngle = carRb.rotation + Mathf.Sign(angleDifference) * maxSteerAngle;
-		}
-		transform.rotation = Quaternion.Euler(0, 0, desiredAngle);
+		float desiredAngle = baseAngle + steerInput * steerCoefficient * maxSteerAngle;
+		desiredAngle = math.clamp(desiredAngle, -maxSteerAngle, maxSteerAngle);
+
+		transform.localRotation = Quaternion.Euler(0, 0, desiredAngle);
 	}
 }
