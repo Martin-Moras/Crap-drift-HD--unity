@@ -13,6 +13,7 @@ public class TireBehaviour : MonoBehaviour
 	public float steerInput = 0;
 	public float steerCoefficient;
 	public float maxSteerAngle;
+	public float maxSteerAngleChange;
 	public bool alignWithVelicity;
 	[Header("Acceleration Settings")]
 	public AnimationCurve accelerationCurve;
@@ -100,10 +101,8 @@ public class TireBehaviour : MonoBehaviour
 			baseAngle = Mathf.DeltaAngle(carRb.rotation, velAngle);
 			// Debug.DrawLine(transform.position, transform.position + Quaternion.Euler(0,0, carRb.transform.rotation.eulerAngles.z + baseAngle) * Vector2.up * 100, Color.green);
 		}
-		float desiredAngle = baseAngle + steerInput * steerCoefficient;
-		desiredAngle = math.clamp(desiredAngle, -maxSteerAngle, maxSteerAngle);
-
-		transform.localRotation = Quaternion.Euler(0, 0, desiredAngle);
+		Quaternion desiredRotation = Quaternion.Euler(0, 0, baseAngle + steerInput * steerCoefficient);
+		transform.localRotation = Quaternion.RotateTowards(transform.localRotation, desiredRotation, maxSteerAngleChange);
 	}
 	Vector2 ForwardVel(Vector2 velocity)
 	{
