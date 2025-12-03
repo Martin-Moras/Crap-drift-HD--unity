@@ -37,6 +37,7 @@ public class TireBehaviour : MonoBehaviour
 	void Awake()
 	{
 		trail = GetComponentInChildren<TrailRenderer>();
+		trail.widthCurve.MoveKey(0, new Keyframe(0, transform.lossyScale.y));
 	}
 	void Update()
 	{
@@ -77,7 +78,6 @@ public class TireBehaviour : MonoBehaviour
 			angularVel += accelerationInput 
 							* (accelerationInput > 0 ? frontAcceleration : backAcceleration)
 							/ accelerationCoefficient * accelerationCurve.Evaluate(angularVel);
-			Debug.Log(accelerationCoefficient * accelerationCurve.Evaluate(angularVel));
 		}
 		Vector2 ForwardVel(Vector2 groundVel)
 		{
