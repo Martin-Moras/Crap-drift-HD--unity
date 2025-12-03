@@ -60,12 +60,12 @@ public class Player : MonoBehaviour
 			tire.isHandBreaking = handBreakInput.IsPressed();
 
 			Vector2 frictionForce = tire.GetFrictionForces(rb);
-			forcePositions[i] = new ForcePosition(frictionForce, tire.transform.position);
+			forcePositions[i] = new ForcePosition(frictionForce * rb.mass, tire.transform.position);
 			// Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + frictionForce, Color.blue);
 		}
 		foreach (var forcePosition in forcePositions)
 		{
-			rb.AddForceAtPosition(forcePosition.force * rb.mass, forcePosition.pos, ForceMode2D.Force);
+			rb.AddForceAtPosition(forcePosition.force, forcePosition.pos, ForceMode2D.Force);
 		}
 	}
 	private void SetCenterOfMassObj()
