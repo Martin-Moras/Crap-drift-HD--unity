@@ -21,9 +21,10 @@ public class TireBehaviour : MonoBehaviour
 	public float frontAcceleration;
 	public float backAcceleration;
 	public float maxSpeed;
+	public bool isHandBreaking = false;
+	public float handBreakForce;
 
 	[Header("Friction Settings")]
-	public bool isHandBreaking = false;
 	public float staticFriction;
 	public float stopSlidingVelocity;
 	public float dynamicFriction;
@@ -37,7 +38,10 @@ public class TireBehaviour : MonoBehaviour
 	void Awake()
 	{
 		trail = GetComponentInChildren<TrailRenderer>();
-		trail.widthCurve.MoveKey(0, new Keyframe(0, transform.lossyScale.y));
+		AnimationCurve newCurve = trail.widthCurve;
+		Keyframe key = new Keyframe(0, transform.lossyScale.y);
+		newCurve.MoveKey(0, key);
+		trail.widthCurve = newCurve;
 	}
 	void Update()
 	{
@@ -49,43 +53,34 @@ public class TireBehaviour : MonoBehaviour
 	{
 		relativeGroundVelocity = -CarRb.GetPointVelocity(transform.position);
 		HandleSteering(CarRb);
-		if (!isHandBreaking)
+		HandleAcceleration();
+		if (isHandBreaking)
 		{
-			HandleAcceleration();
-			relativeGroundVelocity += (Vector2)transform.up * angularVel;
+			angularVel -= math.clamp(handBreakForce * math.sign(angularVel) * Time.fixedDeltaTime, -angularVel, angularVel);
 		}
-		else	
-			angularVel = 0;
+		relativeGroundVelocity += (Vector2)transform.up * angularVel;
 
 		if (isSliding && relativeGroundVelocity.magnitude < stopSlidingVelocity)
 			isSliding = false;
 		if (relativeGroundVelocity.magnitude < staticFriction && !isSliding)
 		{
 			trail.emitting = false;
-			angularVel += Vector2.Dot(ForwardVel(relativeGroundVelocity), transform.up);
-			return -ForwardVel(relativeGroundVelocity) - SiedVel(relativeGroundVelocity);
+			angularVel += Vector2.Dot(ForwardVel(-relativeGroundVelocity), transform.up);
+			return -ForwardVel(-relativeGroundVelocity) - SiedVel(-relativeGroundVelocity);
 		}
 		else
 		{
 			isSliding = true;
 			trail.emitting = true;
-			angularVel += math.sign(Vector2.Dot(ForwardVel(relativeGroundVelocity), transform.up)) * dynamicFriction;
+			angularVel += math.sign(Vector2.Dot(ForwardVel(-relativeGroundVelocity), transform.up)) * dynamicFriction;
 			return relativeGroundVelocity.normalized * dynamicFriction;
 		}
 
 		void HandleAcceleration()
 		{
-			angularVel += accelerationInput 
+			angularVel += accelerationInput
 							* (accelerationInput > 0 ? frontAcceleration : backAcceleration)
-							/ accelerationCoefficient * accelerationCurve.Evaluate(angularVel);
-		}
-		Vector2 ForwardVel(Vector2 groundVel)
-		{
-			return transform.up * (Vector2.Dot(-relativeGroundVelocity, transform.up));
-		}
-		Vector2 SiedVel(Vector2 groundVel)
-		{
-			return transform.right * Vector2.Dot(-relativeGroundVelocity, transform.right);
+							* accelerationCoefficient * accelerationCurve.Evaluate(math.abs(angularVel));
 		}
 		void SetRelativeGroundVelocity()
 		{
@@ -96,14 +91,26 @@ public class TireBehaviour : MonoBehaviour
 	{
 		float baseAngle = 0;
 		Vector2 velocity = carRb.linearVelocity;//.GetPointVelocity(relativePosition);
-		if (alignWithVelicity && velocity.magnitude > 100f)
+		if (alignWithVelicity && velocity.magnitude > 10f && Vector2.Dot(velocity, transform.up) > 0)
 		{
-			float velAngle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+			// Debug.DrawLine(transform.position, (Vector2)transform.position + velocity.normalized * 1000, Color.blue);
+			float velAngle = -Mathf.Atan2(velocity.x, velocity.y) * Mathf.Rad2Deg;
+			// Debug.DrawLine(transform.position, transform.position + Quaternion.Euler(0,0, velAngle) * Vector2.up * 100, Color.lightBlue);
+
 			baseAngle = Mathf.DeltaAngle(carRb.rotation, velAngle);
+			// Debug.DrawLine(transform.position, transform.position + Quaternion.Euler(0,0, carRb.transform.rotation.eulerAngles.z + baseAngle) * Vector2.up * 100, Color.green);
 		}
-		float desiredAngle = baseAngle + steerInput * steerCoefficient * maxSteerAngle;
+		float desiredAngle = baseAngle + steerInput * steerCoefficient;
 		desiredAngle = math.clamp(desiredAngle, -maxSteerAngle, maxSteerAngle);
 
 		transform.localRotation = Quaternion.Euler(0, 0, desiredAngle);
+	}
+	Vector2 ForwardVel(Vector2 velocity)
+	{
+		return transform.up * (Vector2.Dot(velocity, transform.up));
+	}
+	Vector2 SiedVel(Vector2 velocity)
+	{
+		return transform.right * Vector2.Dot(velocity, transform.right);
 	}
 }

@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-	
+
 	private struct ForcePosition
 	{
-		
+
 		public Vector2 pos;
 		public Vector2 force;
 		public ForcePosition(Vector2 force, Vector2 pos)
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 		steeringInput = InputSystem.actions.FindAction("Steer");
 		accelerationInput = InputSystem.actions.FindAction("Acceleration");
 		handBreakInput = InputSystem.actions.FindAction("Handbreak");
-		
+
 		foreach (TireBehaviour tire in tires)
 		{
 			tire.relativePosition = tire.transform.localPosition;
@@ -58,10 +58,10 @@ public class Player : MonoBehaviour
 			tire.steerInput = -steeringInput.ReadValue<float>();
 			tire.accelerationInput = accelerationInput.ReadValue<float>();
 			tire.isHandBreaking = handBreakInput.IsPressed();
-			
+
 			Vector2 frictionForce = tire.GetFrictionForces(rb);
 			forcePositions[i] = new ForcePosition(frictionForce, tire.transform.position);
-			Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + frictionForce, Color.blue);
+			// Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + frictionForce, Color.blue);
 		}
 		foreach (var forcePosition in forcePositions)
 		{
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
 	}
 	private void SetCenterOfMassObj()
 	{
-		for(int i = 0; i < transform.childCount; i++)
+		for (int i = 0; i < transform.childCount; i++)
 		{
 			if (transform.GetChild(i).name != "CenterOfMass")
 				continue;

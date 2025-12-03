@@ -10,22 +10,22 @@ public class CameraBehaviour : MonoBehaviour
 	public float maxDistance = 5;
 	public float folowRotationSpeed = .5f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        cinemachineCamera = GetComponent<CinemachineCamera>();
+	// Start is called once before the first execution of Update after the MonoBehaviour is created
+	void Start()
+	{
+		cinemachineCamera = GetComponent<CinemachineCamera>();
 		target = cinemachineCamera.Target.TrackingTarget;
 		if (target == null)
 		{
 			Debug.Log("Camera Has no target");
 			this.enabled = false;
 		}
-    }
+	}
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
+	// Update is called once per frame
+	void LateUpdate()
+	{
 		Quaternion targetRotation = target.rotation;
 		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, folowRotationSpeed);
-    }
+	}
 }
