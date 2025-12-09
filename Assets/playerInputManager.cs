@@ -111,9 +111,18 @@ public partial class @PlayerInputManager: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Handbreak"",
+                    ""name"": ""HandbreakBack"",
                     ""type"": ""Button"",
                     ""id"": ""b19cff75-e5ac-4e69-b627-0d54195c01c8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HandbreakFront"",
+                    ""type"": ""Button"",
+                    ""id"": ""ebce361d-d87a-4342-b9cd-57489fe1ae78"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -190,11 +199,11 @@ public partial class @PlayerInputManager: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c881090b-8c42-4705-8467-26d32d6673da"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Handbreak"",
+                    ""action"": ""HandbreakBack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -205,7 +214,29 @@ public partial class @PlayerInputManager: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Handbreak"",
+                    ""action"": ""HandbreakBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""655ab0fd-3113-4293-9ec4-73abea46d95f"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HandbreakFront"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8367ded-48b5-49c2-854f-5a80956f498b"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HandbreakFront"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -218,7 +249,8 @@ public partial class @PlayerInputManager: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Acceleration = m_Player.FindAction("Acceleration", throwIfNotFound: true);
         m_Player_Steer = m_Player.FindAction("Steer", throwIfNotFound: true);
-        m_Player_Handbreak = m_Player.FindAction("Handbreak", throwIfNotFound: true);
+        m_Player_HandbreakBack = m_Player.FindAction("HandbreakBack", throwIfNotFound: true);
+        m_Player_HandbreakFront = m_Player.FindAction("HandbreakFront", throwIfNotFound: true);
     }
 
     ~@PlayerInputManager()
@@ -301,7 +333,8 @@ public partial class @PlayerInputManager: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Acceleration;
     private readonly InputAction m_Player_Steer;
-    private readonly InputAction m_Player_Handbreak;
+    private readonly InputAction m_Player_HandbreakBack;
+    private readonly InputAction m_Player_HandbreakFront;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -322,9 +355,13 @@ public partial class @PlayerInputManager: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Steer => m_Wrapper.m_Player_Steer;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Handbreak".
+        /// Provides access to the underlying input action "Player/HandbreakBack".
         /// </summary>
-        public InputAction @Handbreak => m_Wrapper.m_Player_Handbreak;
+        public InputAction @HandbreakBack => m_Wrapper.m_Player_HandbreakBack;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/HandbreakFront".
+        /// </summary>
+        public InputAction @HandbreakFront => m_Wrapper.m_Player_HandbreakFront;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -357,9 +394,12 @@ public partial class @PlayerInputManager: IInputActionCollection2, IDisposable
             @Steer.started += instance.OnSteer;
             @Steer.performed += instance.OnSteer;
             @Steer.canceled += instance.OnSteer;
-            @Handbreak.started += instance.OnHandbreak;
-            @Handbreak.performed += instance.OnHandbreak;
-            @Handbreak.canceled += instance.OnHandbreak;
+            @HandbreakBack.started += instance.OnHandbreakBack;
+            @HandbreakBack.performed += instance.OnHandbreakBack;
+            @HandbreakBack.canceled += instance.OnHandbreakBack;
+            @HandbreakFront.started += instance.OnHandbreakFront;
+            @HandbreakFront.performed += instance.OnHandbreakFront;
+            @HandbreakFront.canceled += instance.OnHandbreakFront;
         }
 
         /// <summary>
@@ -377,9 +417,12 @@ public partial class @PlayerInputManager: IInputActionCollection2, IDisposable
             @Steer.started -= instance.OnSteer;
             @Steer.performed -= instance.OnSteer;
             @Steer.canceled -= instance.OnSteer;
-            @Handbreak.started -= instance.OnHandbreak;
-            @Handbreak.performed -= instance.OnHandbreak;
-            @Handbreak.canceled -= instance.OnHandbreak;
+            @HandbreakBack.started -= instance.OnHandbreakBack;
+            @HandbreakBack.performed -= instance.OnHandbreakBack;
+            @HandbreakBack.canceled -= instance.OnHandbreakBack;
+            @HandbreakFront.started -= instance.OnHandbreakFront;
+            @HandbreakFront.performed -= instance.OnHandbreakFront;
+            @HandbreakFront.canceled -= instance.OnHandbreakFront;
         }
 
         /// <summary>
@@ -435,11 +478,18 @@ public partial class @PlayerInputManager: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSteer(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Handbreak" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "HandbreakBack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnHandbreak(InputAction.CallbackContext context);
+        void OnHandbreakBack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "HandbreakFront" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHandbreakFront(InputAction.CallbackContext context);
     }
 }

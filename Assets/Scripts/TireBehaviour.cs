@@ -50,30 +50,40 @@ public class TireBehaviour : MonoBehaviour
 	private void FixedUpdate()
 	{
 	}
-	public Vector2 GetFrictionForces(Rigidbody2D CarRb)
+	public Vector2 GetFrictionForces(Rigidbody2D carRb)
 	{
-		relativeGroundVelocity = -CarRb.GetPointVelocity(transform.position);
-		HandleSteering(CarRb);
+		relativeGroundVelocity = -carRb.GetPointVelocity(transform.position);
+		HandleSteering(carRb);
+		LetAngularVelApproachRelGroundVel();
 		HandleAcceleration();
 		if (isHandBreaking)
 		{
-			angularVel -= math.clamp(handBreakForce * math.sign(angularVel) * Time.fixedDeltaTime, -angularVel, angularVel);
+			var breakForce = handBreakForce * math.sign(angularVel) * Time.fixedDeltaTime;
+			var clamped = math.clamp(breakForce, -math.abs(angularVel), math.abs(angularVel));
+			angularVel -= clamped;
 		}
+		if (name == "TireFL")
+			Debug.Log($"before angular to groundVel: {relativeGroundVelocity}");
 		relativeGroundVelocity += (Vector2)transform.up * angularVel;
+		if (name == "TireFL")
+			Debug.Log($"after angular to groundVel: {relativeGroundVelocity}");
 
 		if (isSliding && relativeGroundVelocity.magnitude < stopSlidingVelocity)
 			isSliding = false;
 		if (relativeGroundVelocity.magnitude < staticFriction && !isSliding)
 		{
 			trail.emitting = false;
-			angularVel += Vector2.Dot(ForwardVel(-relativeGroundVelocity), transform.up);
-			return -ForwardVel(-relativeGroundVelocity) - SiedVel(-relativeGroundVelocity);
+			if (name == "TireFL")
+				Debug.Log($"before groundVel to angular: {relativeGroundVelocity} angular: {angularVel}");
+			if (name == "TireFL")
+				Debug.Log($"after groundVel to angular: {relativeGroundVelocity} angular: {angularVel}");
+
+			return (-ForwardVel(-relativeGroundVelocity) - SiedVel(-relativeGroundVelocity)) * carRb.mass / Time.fixedDeltaTime;
 		}
 		else
 		{
 			isSliding = true;
 			trail.emitting = true;
-			angularVel += math.sign(Vector2.Dot(ForwardVel(-relativeGroundVelocity), transform.up)) * dynamicFriction;
 			return relativeGroundVelocity.normalized * dynamicFriction;
 		}
 
@@ -83,9 +93,12 @@ public class TireBehaviour : MonoBehaviour
 							* (accelerationInput > 0 ? frontAcceleration : backAcceleration)
 							* accelerationCoefficient * accelerationCurve.Evaluate(math.abs(angularVel));
 		}
-		void SetRelativeGroundVelocity()
+		void LetAngularVelApproachRelGroundVel()
 		{
-
+			float forceApplied = Vector2.Dot(ForwardVel(-relativeGroundVelocity), transform.up);
+			if (isSliding)
+				forceApplied = math.clamp(forceApplied, -dynamicFriction, dynamicFriction);
+			angularVel += forceApplied - angularVel;
 		}
 	}
 	public void HandleSteering(Rigidbody2D carRb)
@@ -101,12 +114,13 @@ public class TireBehaviour : MonoBehaviour
 			baseAngle = Mathf.DeltaAngle(carRb.rotation, velAngle);
 			// Debug.DrawLine(transform.position, transform.position + Quaternion.Euler(0,0, carRb.transform.rotation.eulerAngles.z + baseAngle) * Vector2.up * 100, Color.green);
 		}
-		Quaternion desiredRotation = Quaternion.Euler(0, 0, baseAngle + steerInput * steerCoefficient);
-		transform.localRotation = Quaternion.RotateTowards(transform.localRotation, desiredRotation, maxSteerAngleChange);
+		float desiredAngle = baseAngle + steerInput * steerCoefficient;
+		Quaternion desiredRotationClamped = Quaternion.Euler(0, 0, math.clamp(desiredAngle, -maxSteerAngle, maxSteerAngle));
+		transform.localRotation = Quaternion.RotateTowards(transform.localRotation, desiredRotationClamped, maxSteerAngleChange);
 	}
 	Vector2 ForwardVel(Vector2 velocity)
 	{
-		return transform.up * (Vector2.Dot(velocity, transform.up));
+		return transform.up * Vector2.Dot(velocity, transform.up);
 	}
 	Vector2 SiedVel(Vector2 velocity)
 	{

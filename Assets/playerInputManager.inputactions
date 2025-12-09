@@ -25,9 +25,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Handbreak",
+                    "name": "HandbreakBack",
                     "type": "Button",
                     "id": "b19cff75-e5ac-4e69-b627-0d54195c01c8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HandbreakFront",
+                    "type": "Button",
+                    "id": "ebce361d-d87a-4342-b9cd-57489fe1ae78",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -104,11 +113,11 @@
                 {
                     "name": "",
                     "id": "c881090b-8c42-4705-8467-26d32d6673da",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Handbreak",
+                    "action": "HandbreakBack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -119,7 +128,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Handbreak",
+                    "action": "HandbreakBack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "655ab0fd-3113-4293-9ec4-73abea46d95f",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HandbreakFront",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f8367ded-48b5-49c2-854f-5a80956f498b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HandbreakFront",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
