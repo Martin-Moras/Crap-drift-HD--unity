@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
 	void Update()
 	{
 		rb.centerOfMass = centerOfMass.localPosition;
+		// rb.inertia = 500000;
 	}
 	private void FixedUpdate()
 	{

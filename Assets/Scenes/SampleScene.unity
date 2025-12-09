@@ -2699,15 +2699,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: staticFriction
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: dynamicFriction
-      value: 10000
+      value: 50000
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: backAcceleration
-      value: 0.2
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: steerCoefficient
@@ -2719,7 +2719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: frontAcceleration
-      value: 0.2
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: maxSteerAngleChange
@@ -2851,15 +2851,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: staticFriction
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: dynamicFriction
-      value: 10000
+      value: 50000
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: backAcceleration
-      value: 0.2
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: steerCoefficient
@@ -2871,7 +2871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: frontAcceleration
-      value: 0.2
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: maxSteerAngleChange
@@ -2987,7 +2987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4235266968063790312, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: m_Mass
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4235266968063790312, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: m_UseAutoMass
@@ -3211,15 +3211,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: staticFriction
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: dynamicFriction
-      value: 10000
+      value: 50000
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: backAcceleration
-      value: 0.2
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: steerCoefficient
@@ -3231,7 +3231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: frontAcceleration
-      value: 0.2
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: maxSteerAngleChange
@@ -3315,15 +3315,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: staticFriction
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: dynamicFriction
-      value: 10000
+      value: 50000
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: backAcceleration
-      value: 0.2
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: steerCoefficient
@@ -3335,7 +3335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: frontAcceleration
-      value: 0.2
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: maxSteerAngleChange

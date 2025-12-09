@@ -62,29 +62,20 @@ public class TireBehaviour : MonoBehaviour
 			var clamped = math.clamp(breakForce, -math.abs(angularVel), math.abs(angularVel));
 			angularVel -= clamped;
 		}
-		if (name == "TireFL")
-			Debug.Log($"before angular to groundVel: {relativeGroundVelocity}");
 		relativeGroundVelocity += (Vector2)transform.up * angularVel;
-		if (name == "TireFL")
-			Debug.Log($"after angular to groundVel: {relativeGroundVelocity}");
 
 		if (isSliding && relativeGroundVelocity.magnitude < stopSlidingVelocity)
 			isSliding = false;
 		if (relativeGroundVelocity.magnitude < staticFriction && !isSliding)
 		{
 			trail.emitting = false;
-			if (name == "TireFL")
-				Debug.Log($"before groundVel to angular: {relativeGroundVelocity} angular: {angularVel}");
-			if (name == "TireFL")
-				Debug.Log($"after groundVel to angular: {relativeGroundVelocity} angular: {angularVel}");
-
 			return (-ForwardVel(-relativeGroundVelocity) - SiedVel(-relativeGroundVelocity)) * carRb.mass / Time.fixedDeltaTime;
 		}
 		else
 		{
 			isSliding = true;
 			trail.emitting = true;
-			return relativeGroundVelocity.normalized * dynamicFriction;
+			return relativeGroundVelocity.normalized * math.clamp(dynamicFriction, 0, relativeGroundVelocity.magnitude * carRb.mass / Time.fixedDeltaTime);
 		}
 
 		void HandleAcceleration()
