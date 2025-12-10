@@ -58,12 +58,7 @@ public class TireBehaviour : MonoBehaviour
 		HandleSteering(carRb);
 		LetAngularVelApproachRelGroundVel();
 		HandleAcceleration();
-		if (isHandBreaking)
-		{
-			var breakForce = handBreakForce * math.sign(angularVel) * Time.fixedDeltaTime;
-			var clamped = math.clamp(breakForce, -math.abs(angularVel), math.abs(angularVel));
-			angularVel -= clamped;
-		}
+		HandleHandbreaking();
 		relativeGroundVelocity += (Vector2)transform.up * angularVel;
 
 		if (isSliding && relativeGroundVelocity.magnitude < stopSlidingVelocity)
@@ -91,8 +86,19 @@ public class TireBehaviour : MonoBehaviour
 		{
 			float forceApplied = Vector2.Dot(ForwardVel(-relativeGroundVelocity), transform.up) - angularVel;
 			if (isSliding)
-				forceApplied = math.clamp(forceApplied, -dynamicFriction / 20000, dynamicFriction / 20000);
+			{
+				float fric = dynamicFriction / 200 * Time.fixedDeltaTime;
+				forceApplied = math.clamp(forceApplied, -fric, fric);
+			}
 			angularVel += forceApplied;
+		}
+		void HandleHandbreaking()
+		{
+			if (!isHandBreaking)
+				return;
+			var breakForce = handBreakForce * math.sign(angularVel) * Time.fixedDeltaTime;
+			var clamped = math.clamp(breakForce, -math.abs(angularVel), math.abs(angularVel));
+			angularVel -= clamped;
 		}
 	}
 	public void HandleSteering(Rigidbody2D carRb)
