@@ -69,6 +69,8 @@ public class Player : MonoBehaviour
 			float visLineReducer = 5000;
 			Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + frictionForce.normalized * tire.staticFriction / Time.fixedDeltaTime * rb.mass / visLineReducer, Color.red);
 			Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + frictionForce / visLineReducer, Color.blue);
+			if (tire.steerCoefficient == 0)
+				Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + -(Vector2)transform.up * tire.angularVel, Color.green);
 		}
 		foreach (var forcePosition in forcePositions)
 		{

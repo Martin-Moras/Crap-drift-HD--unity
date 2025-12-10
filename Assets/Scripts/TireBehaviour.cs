@@ -87,10 +87,13 @@ public class TireBehaviour : MonoBehaviour
 		}
 		void LetAngularVelApproachRelGroundVel()
 		{
-			float forceApplied = Vector2.Dot(ForwardVel(-relativeGroundVelocity), transform.up);
+			float forceApplied = Vector2.Dot(ForwardVel(-relativeGroundVelocity), transform.up) - angularVel;
+			float forceBeforeClamp = forceApplied;
 			if (isSliding)
 				forceApplied = math.clamp(forceApplied, -dynamicFriction, dynamicFriction);
-			angularVel += forceApplied - angularVel;
+			Debug.Log($"force before clamp: {forceBeforeClamp} force after clamp: {forceApplied}");
+
+			angularVel += forceApplied;
 		}
 	}
 	public void HandleSteering(Rigidbody2D carRb)
