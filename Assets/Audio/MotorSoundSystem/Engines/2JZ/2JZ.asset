@@ -12,6 +12,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb546e97b7d5974ab68e8f44dcb485f, type: 3}
   m_Name: 2JZ
   m_EditorClassIdentifier: 
+  tireSquealing:
+    audio: {fileID: 8300000, guid: 3bf36950d5b6346ab91a77dd2b9b63f8, type: 3}
+    volumeCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2.7166994
+        outSlope: 2.7166994
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.05025392
+        value: 0.1365248
+        inSlope: 2.1069589
+        outSlope: 2.1069589
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 1
+        outWeight: 0.110048175
+      - serializedVersion: 3
+        time: 0.97887576
+        value: 0.98420525
+        inSlope: 0.50431204
+        outSlope: 0.50431204
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.20305155
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    pitchCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.0040809633
+        value: 0.6975455
+        inSlope: 0.20309809
+        outSlope: 0.20309809
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9958191
+        value: 0.9006233
+        inSlope: 0.20309809
+        outSlope: 0.20309809
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   idle:
     audio: {fileID: 8300000, guid: b9f679578b99443478c8b0522a49290f, type: 3}
     volumeCurve:

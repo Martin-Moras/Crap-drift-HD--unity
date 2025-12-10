@@ -12,16 +12,17 @@ namespace MertStudio.Car.Sounds
     public class CarAudioController : MonoBehaviour
     {
         public bool sparkWhileAccelleration;
-        [Range(0f, 1f)] public float rpm,sparkRate;
+        [Range(0f, 1f)] public float tireSlideVelocity,rpm,sparkRate;
         public EngineAudioSetup setup;
-        private CarAudio idle, lowAcceleration, mediumAcceleration, highAcceleration, limiter,spark1A,spark2A,spark3A;
-        private AudioSource idleSource,lowAccel, medAccel, highAccel, limit,spark1,spark2,spark3;
+        private CarAudio tireSquealing, idle, lowAcceleration, mediumAcceleration, highAcceleration, limiter,spark1A,spark2A,spark3A;
+        private AudioSource tireSquealingSource, idleSource,lowAccel, medAccel, highAccel, limit,spark1,spark2,spark3;
         private float oldRpm = 0;
         void Awake()
         {
             getSetup();
 
             //initialise audio sources
+            tireSquealingSource = gameObject.AddComponent<AudioSource>();
             lowAccel = gameObject.AddComponent<AudioSource>();
             medAccel = gameObject.AddComponent<AudioSource>();
             highAccel = gameObject.AddComponent<AudioSource>();
@@ -32,6 +33,7 @@ namespace MertStudio.Car.Sounds
             spark3 = gameObject.AddComponent<AudioSource>();
 
 
+			tireSquealingSource.loop = true;
             lowAccel.loop = true;
             medAccel.loop = true;
             highAccel.loop = true;
@@ -40,6 +42,7 @@ namespace MertStudio.Car.Sounds
 
             UpdateEngineSetup();
 
+			tireSquealingSource.Play();
             lowAccel.Play();
             medAccel.Play();
             highAccel.Play();
@@ -49,6 +52,7 @@ namespace MertStudio.Car.Sounds
         }
         private void getSetup()
         {
+			tireSquealing = setup.tireSquealing;
             sparkRate = setup.sparkRate;
 
             idle = setup.idle;
@@ -66,6 +70,8 @@ namespace MertStudio.Car.Sounds
         {
             getSetup(); //to prevent bugs when updating engine audio from other scripts
 
+			tireSquealingSource.clip = tireSquealing.audio;
+
             spark1.clip = spark1A.audio;
             spark2.clip = spark2A.audio;
             spark3.clip = spark3A.audio;
@@ -76,6 +82,7 @@ namespace MertStudio.Car.Sounds
             limit.clip = limiter.audio;
             idleSource.clip = idle.audio;
 
+			tireSquealingSource.Play();
             lowAccel.Play();
             medAccel.Play();
             highAccel.Play();
@@ -97,6 +104,9 @@ namespace MertStudio.Car.Sounds
             {
                 spark();
             }
+
+			tireSquealingSource.volume = tireSquealing.volumeCurve.Evaluate(tireSlideVelocity);
+			tireSquealingSource.pitch = tireSquealing.pitchCurve.Evaluate(tireSlideVelocity);
 
             lowAccel.volume = lowAcceleration.volumeCurve.Evaluate(rpm);
             lowAccel.pitch = lowAcceleration.volumeCurve.Evaluate(rpm);

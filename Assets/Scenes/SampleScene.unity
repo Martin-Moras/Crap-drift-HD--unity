@@ -2699,15 +2699,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: staticFriction
-      value: 20
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: dynamicFriction
-      value: 30000
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: backAcceleration
-      value: 2
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: steerCoefficient
@@ -2719,7 +2719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: frontAcceleration
-      value: 10
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: maxSteerAngleChange
@@ -2743,7 +2743,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[1].time
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[0].value
@@ -2851,19 +2851,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: staticFriction
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: dynamicFriction
-      value: 30000
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: backAcceleration
-      value: 2
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: steerCoefficient
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: alignWithVelicity
@@ -2871,11 +2871,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: frontAcceleration
-      value: 40
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: maxSteerAngleChange
-      value: 0.8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: stopSlidingVelocity
@@ -2883,7 +2883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCoefficient
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.size
@@ -2895,7 +2895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[1].time
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[0].value
@@ -2907,27 +2907,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[0].inSlope
-      value: 0.009401184
+      value: 0.10296536
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[1].inSlope
-      value: -0.007695766
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[0].outSlope
-      value: 0.009401184
+      value: 0.10296536
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[1].inWeight
-      value: 0.3151577
+      value: 0.34583333
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[1].outSlope
-      value: -0.007695766
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[0].outWeight
-      value: 0.4274274
+      value: 0.051269673
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[0].tangentMode
@@ -2991,6 +2991,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4235266968063790312, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235266968063790312, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
+      propertyPath: m_LinearDamping
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4235266968063790312, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
@@ -3211,15 +3215,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: staticFriction
-      value: 20
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: dynamicFriction
-      value: 30000
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: backAcceleration
-      value: 2
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: steerCoefficient
@@ -3231,7 +3235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: frontAcceleration
-      value: 10
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: maxSteerAngleChange
@@ -3255,7 +3259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[1].time
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[0].value
@@ -3315,19 +3319,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: staticFriction
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: dynamicFriction
-      value: 30000
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: backAcceleration
-      value: 2
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: steerCoefficient
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: alignWithVelicity
@@ -3335,11 +3339,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: frontAcceleration
-      value: 40
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: maxSteerAngleChange
-      value: 0.8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: stopSlidingVelocity
@@ -3347,7 +3351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCoefficient
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.size
@@ -3359,7 +3363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[1].time
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[0].value
@@ -3371,27 +3375,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[0].inSlope
-      value: 0.009401184
+      value: 0.006530875
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[1].inSlope
-      value: -0.007695766
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[0].outSlope
-      value: 0.009401184
+      value: 0.006530875
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[1].inWeight
-      value: 0.3151577
+      value: 0.34583333
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[1].outSlope
-      value: -0.007695766
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[0].outWeight
-      value: 0.4274274
+      value: 0.663087
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.data[0].tangentMode

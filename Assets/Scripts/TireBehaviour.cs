@@ -88,30 +88,31 @@ public class TireBehaviour : MonoBehaviour
 		void LetAngularVelApproachRelGroundVel()
 		{
 			float forceApplied = Vector2.Dot(ForwardVel(-relativeGroundVelocity), transform.up) - angularVel;
-			float forceBeforeClamp = forceApplied;
 			if (isSliding)
-				forceApplied = math.clamp(forceApplied, -dynamicFriction, dynamicFriction);
-			Debug.Log($"force before clamp: {forceBeforeClamp} force after clamp: {forceApplied}");
-
+				forceApplied = math.clamp(forceApplied, -dynamicFriction / 20000, dynamicFriction / 20000);
 			angularVel += forceApplied;
 		}
 	}
 	public void HandleSteering(Rigidbody2D carRb)
 	{
-		float baseAngle = 0;
-		Vector2 velocity = carRb.linearVelocity;//.GetPointVelocity(relativePosition);
-		if (alignWithVelicity && velocity.magnitude > 10f && Vector2.Dot(velocity, transform.up) > 0)
-		{
-			// Debug.DrawLine(transform.position, (Vector2)transform.position + velocity.normalized * 1000, Color.blue);
-			float velAngle = -Mathf.Atan2(velocity.x, velocity.y) * Mathf.Rad2Deg;
-			// Debug.DrawLine(transform.position, transform.position + Quaternion.Euler(0,0, velAngle) * Vector2.up * 100, Color.lightBlue);
-
-			baseAngle = Mathf.DeltaAngle(carRb.rotation, velAngle);
-			// Debug.DrawLine(transform.position, transform.position + Quaternion.Euler(0,0, carRb.transform.rotation.eulerAngles.z + baseAngle) * Vector2.up * 100, Color.green);
-		}
+		float baseAngle = GetBaseAngle(carRb);
 		float desiredAngle = baseAngle + steerInput * steerCoefficient;
 		Quaternion desiredRotationClamped = Quaternion.Euler(0, 0, math.clamp(desiredAngle, -maxSteerAngle, maxSteerAngle));
 		transform.localRotation = Quaternion.RotateTowards(transform.localRotation, desiredRotationClamped, maxSteerAngleChange);
+
+
+		float GetBaseAngle(Rigidbody2D carRb)
+		{
+			Vector2 velocity = carRb.linearVelocity;
+			if (alignWithVelicity && velocity.magnitude > 10f && Vector2.Dot(velocity, transform.up) > 0)
+			{
+				float velAngle = -Mathf.Atan2(velocity.x, velocity.y) * Mathf.Rad2Deg;
+
+				return Mathf.DeltaAngle(carRb.rotation, velAngle);
+			}
+			else
+				return 0;
+		}
 	}
 	Vector2 ForwardVel(Vector2 velocity)
 	{

@@ -69,8 +69,8 @@ public class Player : MonoBehaviour
 			float visLineReducer = 5000;
 			Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + frictionForce.normalized * tire.staticFriction / Time.fixedDeltaTime * rb.mass / visLineReducer, Color.red);
 			Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + frictionForce / visLineReducer, Color.blue);
-			if (tire.steerCoefficient == 0)
-				Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + -(Vector2)transform.up * tire.angularVel, Color.green);
+			// if (tire.steerCoefficient == 0)
+			// 	Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + -(Vector2)transform.up * tire.angularVel, Color.green);
 		}
 		foreach (var forcePosition in forcePositions)
 		{
@@ -91,7 +91,20 @@ public class Player : MonoBehaviour
 		if (acceleratingTiresCount > 0)
 		{
 			float rpm = tireAngularVelSum / acceleratingTiresCount;
-			carAudioController.rpm = rpm / 700;
+			carAudioController.rpm = rpm / 400;
+		}
+		HandleSquealing();
+		
+		void HandleSquealing()
+		{
+			float slidingVel = 0;
+			foreach (var tire in tires)
+			{
+				if (!tire.isSliding)
+					continue;
+				slidingVel = math.max(slidingVel, tire.relativeGroundVelocity.magnitude / 200);
+			}
+			carAudioController.tireSlideVelocity = slidingVel;
 		}
 	}
 	private void SetCenterOfMassObj()
