@@ -82,7 +82,8 @@ public class TireBehaviour : MonoBehaviour
 		{
 			angularVel += accelerationInput
 							* (accelerationInput > 0 ? frontAcceleration : backAcceleration)
-							* accelerationCoefficient * accelerationCurve.Evaluate(math.abs(angularVel));
+							* accelerationCoefficient * accelerationCurve.Evaluate(math.abs(angularVel))
+							* Time.fixedDeltaTime;
 		}
 		void LetAngularVelApproachRelGroundVel()
 		{

@@ -47,7 +47,6 @@ public class Player : MonoBehaviour
 	void Update()
 	{
 		rb.centerOfMass = centerOfMass.localPosition;
-		// rb.inertia = 500000;
 	}
 	private void FixedUpdate()
 	{
@@ -67,8 +66,9 @@ public class Player : MonoBehaviour
 
 			Vector2 frictionForce = tire.GetFrictionForces(rb);
 			forcePositions[i] = new ForcePosition(frictionForce, tire.transform.position);
-			// rb.AddForce(forcePositions[i].force, ForceMode2D.Force);
-			Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + frictionForce, Color.blue);
+			float visLineReducer = 5000;
+			Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + frictionForce.normalized * tire.staticFriction / Time.fixedDeltaTime * rb.mass / visLineReducer, Color.red);
+			Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + frictionForce / visLineReducer, Color.blue);
 		}
 		foreach (var forcePosition in forcePositions)
 		{
