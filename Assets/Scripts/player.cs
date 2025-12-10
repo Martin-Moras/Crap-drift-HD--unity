@@ -44,9 +44,12 @@ public class Player : MonoBehaviour
 			tire.relativePosition = tire.transform.localPosition;
 		}
 	}
+	public float steerInputLastFrame, steerInput, maxSteerInputAngleChange;
 	void Update()
 	{
 		rb.centerOfMass = centerOfMass.localPosition;
+		Debug.Log(Mathf.MoveTowardsAngle(steerInputLastFrame, -steeringInput.ReadValue<float>(), maxSteerInputAngleChange));
+		steerInputLastFrame = Mathf.MoveTowardsAngle(steerInputLastFrame, -steeringInput.ReadValue<float>(), maxSteerInputAngleChange);
 	}
 	private void FixedUpdate()
 	{

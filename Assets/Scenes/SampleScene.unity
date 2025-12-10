@@ -2681,13 +2681,17 @@ PrefabInstance:
       propertyPath: mainCam
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 1823210016, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
+      propertyPath: maxSteerInputAngleChange
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: maxSpeed
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: maxSteerAngle
-      value: 45
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: handBreakForce
@@ -2699,7 +2703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: staticFriction
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: dynamicFriction
@@ -2723,7 +2727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: maxSteerAngleChange
-      value: 0.8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: stopSlidingVelocity
@@ -2732,6 +2736,10 @@ PrefabInstance:
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCoefficient
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
+      propertyPath: maxSteerInputAngleChange
+      value: 0.002
       objectReference: {fileID: 0}
     - target: {fileID: 68481285199561153, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.size
@@ -2851,7 +2859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: staticFriction
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: dynamicFriction
@@ -2884,6 +2892,10 @@ PrefabInstance:
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCoefficient
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
+      propertyPath: maxSteerInputAngleChange
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2462751260281703572, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.size
@@ -3203,7 +3215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: maxSteerAngle
-      value: 45
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: handBreakForce
@@ -3215,7 +3227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: staticFriction
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: dynamicFriction
@@ -3239,7 +3251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: maxSteerAngleChange
-      value: 0.8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: stopSlidingVelocity
@@ -3248,6 +3260,10 @@ PrefabInstance:
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCoefficient
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
+      propertyPath: maxSteerInputAngleChange
+      value: 0.002
       objectReference: {fileID: 0}
     - target: {fileID: 8857539125056000555, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.size
@@ -3319,7 +3335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: staticFriction
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: dynamicFriction
@@ -3352,6 +3368,10 @@ PrefabInstance:
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCoefficient
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
+      propertyPath: maxSteerInputAngleChange
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8943524887414178465, guid: 46768c333b742ff4ca4d4821a4771744, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.size

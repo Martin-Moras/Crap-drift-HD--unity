@@ -10,10 +10,12 @@ public class TireBehaviour : MonoBehaviour
 	[SerializeField] public TrailRenderer trail { get; private set; }
 	public Vector2 relativePosition;
 	[Header("Steering Settings")]
-	public float steerInput = 0;
+	public float steerInput;
+	private float steerInputLastFrame;
 	public float steerCoefficient;
 	public float maxSteerAngle;
 	public float maxSteerAngleChange;
+	public float maxSteerInputAngleChange;
 	public bool alignWithVelicity;
 	[Header("Acceleration Settings")]
 	public AnimationCurve accelerationCurve;
@@ -96,10 +98,9 @@ public class TireBehaviour : MonoBehaviour
 	public void HandleSteering(Rigidbody2D carRb)
 	{
 		float baseAngle = GetBaseAngle(carRb);
-		float desiredAngle = baseAngle + steerInput * steerCoefficient;
+		float desiredAngle = baseAngle + GetSteerInput() * steerCoefficient;
 		Quaternion desiredRotationClamped = Quaternion.Euler(0, 0, math.clamp(desiredAngle, -maxSteerAngle, maxSteerAngle));
 		transform.localRotation = Quaternion.RotateTowards(transform.localRotation, desiredRotationClamped, maxSteerAngleChange);
-
 
 		float GetBaseAngle(Rigidbody2D carRb)
 		{
@@ -112,6 +113,12 @@ public class TireBehaviour : MonoBehaviour
 			}
 			else
 				return 0;
+		}
+		float GetSteerInput()
+		{
+			float angle = Mathf.MoveTowardsAngle(steerInputLastFrame, steerInput, maxSteerInputAngleChange);
+			steerInputLastFrame = angle;
+			return angle;
 		}
 	}
 	Vector2 ForwardVel(Vector2 velocity)
