@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TireBehaviour
   relativePosition: {x: 0, y: 0}
-  steerInput: 0
+  steerInput: {x: 0, y: 0}
   steerCoefficient: 0
   maxSteerAngle: 90
   maxSteerAngleChange: 0

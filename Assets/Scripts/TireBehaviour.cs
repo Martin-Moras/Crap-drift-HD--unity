@@ -114,7 +114,8 @@ public class TireBehaviour : MonoBehaviour
 
 		float GetBaseAngle(Rigidbody2D carRb)
 		{
-			Vector2 velocity = carRb.GetPointVelocity(carRb.position + (Vector2)transform.up * transform.localPosition.y);
+			Vector2 velocity = carRb.GetPointVelocity(transform.position	);
+			// Vector2 velocity = carRb.GetPointVelocity(carRb.position + (Vector2)transform.up * transform.localPosition.y);
 			if (alignWithVelicity && velocity.magnitude > 12f && Vector2.Dot(velocity, transform.up) > 0)
 			{
 				float velAngle = -Mathf.Atan2(velocity.x, velocity.y) * Mathf.Rad2Deg;
