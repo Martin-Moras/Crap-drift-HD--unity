@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MertStudio.Car.Sounds;
 using Unity.Mathematics;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -44,12 +45,9 @@ public class Player : MonoBehaviour
 			tire.relativePosition = tire.transform.localPosition;
 		}
 	}
-	public float steerInputLastFrame, steerInput, maxSteerInputAngleChange;
 	void Update()
 	{
 		rb.centerOfMass = centerOfMass.localPosition;
-		Debug.Log(Mathf.MoveTowardsAngle(steerInputLastFrame, -steeringInput.ReadValue<float>(), maxSteerInputAngleChange));
-		steerInputLastFrame = Mathf.MoveTowardsAngle(steerInputLastFrame, -steeringInput.ReadValue<float>(), maxSteerInputAngleChange);
 	}
 	private void FixedUpdate()
 	{
@@ -63,17 +61,19 @@ public class Player : MonoBehaviour
 		{
 			TireBehaviour tire = tires[i];
 
-			tire.steerInput = -steeringInput.ReadValue<float>();
+			tire.steerInput = steeringInput.ReadValue<Vector2>();
 			tire.accelerationInput = accelerationInput.ReadValue<float>();
 			tire.isHandBreaking = tire.relativePosition.y > 0 ? handBreakFrontInput.IsPressed() : handBreakBackInput.IsPressed();
 
 			Vector2 frictionForce = tire.GetFrictionForces(rb);
 			forcePositions[i] = new ForcePosition(frictionForce, tire.transform.position);
 			float visLineReducer = 5000;
+			// if (tire.name == "TireBL")
+			// 	Debug.Log($"angular vel: {tire.angularVel} acceleration: {tire.accelerationCurve.Evaluate(math.abs(tire.angularVel))}");
 			Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + frictionForce.normalized * tire.staticFriction / Time.fixedDeltaTime * rb.mass / visLineReducer, Color.red);
 			Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + frictionForce / visLineReducer, Color.blue);
-			// if (tire.steerCoefficient == 0)
-			// 	Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + -(Vector2)transform.up * tire.angularVel, Color.green);
+			if (tire.steerCoefficient == 0)
+				Debug.DrawLine(tire.transform.position, (Vector2)tire.transform.position + -(Vector2)transform.up * tire.angularVel / 15, Color.green);
 		}
 		foreach (var forcePosition in forcePositions)
 		{
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
 			carAudioController.rpm = rpm / 400;
 		}
 		HandleSquealing();
-		
+
 		void HandleSquealing()
 		{
 			float slidingVel = 0;

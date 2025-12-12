@@ -103,12 +103,12 @@ public partial class @PlayerInputManager: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Steer"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""09c935cc-fd71-4979-b1ab-642a9a0723c2"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""HandbreakBack"",
@@ -164,9 +164,9 @@ public partial class @PlayerInputManager: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""1818a992-301b-4c21-bc24-948e36010157"",
-                    ""path"": ""1DAxis"",
+                    ""name"": ""2D Vector"",
+                    ""id"": ""649ac1af-0ece-4c0a-b8ed-303975e4ff30"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -175,8 +175,30 @@ public partial class @PlayerInputManager: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
-                    ""id"": ""a456ec7d-2f69-477e-ae2a-953b09c1a547"",
+                    ""name"": ""up"",
+                    ""id"": ""9af587c4-2c0d-43e7-96c7-44b632741d87"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""1a68dfcb-c07b-4305-97da-dd77ebd45f30"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""35d2a1d0-e725-4a3d-abd9-5e221078d973"",
                     ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -186,8 +208,8 @@ public partial class @PlayerInputManager: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
-                    ""id"": ""7438015f-8c0a-45ba-8722-8c2d1bff0d9e"",
+                    ""name"": ""right"",
+                    ""id"": ""6d5bc284-fd83-464d-8643-aed62e6d63d6"",
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",

@@ -10,7 +10,7 @@ public class TireBehaviour : MonoBehaviour
 	[SerializeField] public TrailRenderer trail { get; private set; }
 	public Vector2 relativePosition;
 	[Header("Steering Settings")]
-	public float steerInput;
+	public Vector2 steerInput;
 	private float steerInputLastFrame;
 	public float steerCoefficient;
 	public float maxSteerAngle;
@@ -42,7 +42,7 @@ public class TireBehaviour : MonoBehaviour
 	{
 		trail = GetComponentInChildren<TrailRenderer>();
 		AnimationCurve newCurve = trail.widthCurve;
-		Keyframe key = new Keyframe(0, transform.lossyScale.y);
+		Keyframe key = new Keyframe(0, transform.lossyScale.y / .05f);
 		newCurve.MoveKey(0, key);
 		trail.widthCurve = newCurve;
 	}
@@ -87,7 +87,7 @@ public class TireBehaviour : MonoBehaviour
 			float forceApplied = Vector2.Dot(ForwardVel(-relativeGroundVelocity), transform.up) - angularVel;
 			if (isSliding)
 			{
-				float fric = dynamicFriction / 200 * Time.fixedDeltaTime;
+				float fric = dynamicFriction / 100 * Time.fixedDeltaTime;
 				forceApplied = math.clamp(forceApplied, -fric, fric);
 			}
 			angularVel += forceApplied;
@@ -105,13 +105,17 @@ public class TireBehaviour : MonoBehaviour
 	{
 		float baseAngle = GetBaseAngle(carRb);
 		float desiredAngle = baseAngle + GetSteerInput() * steerCoefficient;
+		// if (steerCoefficient > 0)
+		// 	transform.rotation = Quaternion.Euler(0, 0, desiredAngle);
+		// else
+		// 	transform.localRotation = Quaternion.identity;
 		Quaternion desiredRotationClamped = Quaternion.Euler(0, 0, math.clamp(desiredAngle, -maxSteerAngle, maxSteerAngle));
-		transform.localRotation = Quaternion.RotateTowards(transform.localRotation, desiredRotationClamped, maxSteerAngleChange);
+		transform.localRotation = Quaternion.RotateTowards(transform.localRotation, desiredRotationClamped, maxSteerAngleChange * Time.fixedDeltaTime);
 
 		float GetBaseAngle(Rigidbody2D carRb)
 		{
-			Vector2 velocity = carRb.linearVelocity;
-			if (alignWithVelicity && velocity.magnitude > 10f && Vector2.Dot(velocity, transform.up) > 0)
+			Vector2 velocity = carRb.GetPointVelocity(carRb.position + (Vector2)transform.up * transform.localPosition.y);
+			if (alignWithVelicity && velocity.magnitude > 12f && Vector2.Dot(velocity, transform.up) > 0)
 			{
 				float velAngle = -Mathf.Atan2(velocity.x, velocity.y) * Mathf.Rad2Deg;
 
@@ -122,7 +126,9 @@ public class TireBehaviour : MonoBehaviour
 		}
 		float GetSteerInput()
 		{
-			float angle = Mathf.MoveTowardsAngle(steerInputLastFrame, steerInput, maxSteerInputAngleChange);
+			float angle = Mathf.MoveTowardsAngle(steerInputLastFrame, -steerInput.x, maxSteerInputAngleChange * Time.fixedDeltaTime);
+			// float angle = -Mathf.Atan2(steerInput.x, steerInput.y) * Mathf.Rad2Deg;
+
 			steerInputLastFrame = angle;
 			return angle;
 		}
