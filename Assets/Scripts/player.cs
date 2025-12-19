@@ -105,7 +105,9 @@ public class Player : MonoBehaviour
 			{
 				if (!tire.isSliding)
 					continue;
-				slidingVel = math.max(slidingVel, tire.relativeGroundVelocity.magnitude / 200);
+				slidingVel = math.max(slidingVel, tire.relativeGroundVelocity.magnitude / 400);
+				if (tire.name == "TireBL")
+					Debug.Log($"{tire.relativeGroundVelocity.magnitude}");
 			}
 			carAudioController.tireSlideVelocity = slidingVel;
 		}
